@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PORT: 4000
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    environment:
+      PORT: 80
+      BACKEND_URL: http://backend:4000
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
